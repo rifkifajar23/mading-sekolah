@@ -2,11 +2,13 @@
 	<h3 class="judulAbuAbu alignCenter">Edit Foto</h3>
 	<hr>
 	<?php if($foto??false) : ?>
-	<?= form_open('adminGaleri/editFoto',['class'=>'form']); ?>
-		<input type="hidden" name="foto_id" value="<?= $foto->foto_id??''; ?>">
+	<?= form_open('adminGaleri/editFoto',['class'=>'form', "enctype" => "multipart/form-data"]); ?>
+		<input type="hidden" name="foto_id" value="<?= $foto->foto_id ?? '' ?>">
 
 		<?= $errors['url_foto']??''; ?>
-		<input type="text" name="url_foto" placeholder="url foto" class="form-control" value="<?= $foto->url_foto??''; ?>">
+		<input type="file" name="url_foto" class="form-control">
+
+
 		<?= $errors['keterangan']??''; ?>
 		<textarea placeholder="keterangan" name="keterangan" class="form-control"><?= $foto->keterangan??''; ?></textarea>
 

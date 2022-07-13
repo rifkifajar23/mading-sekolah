@@ -63,21 +63,28 @@ class AdminGaleri extends CI_Controller {
 	}
 
 	public function editFoto() {
-		
 		if(isset($_POST['submit'])) {
 
-			$this->form_validation->set_rules('url_foto','Url foto','required|max_length[100]',message_id());
+			$config['upload_path']          = './assets/img/galeri';
+            $config['allowed_types']        = 'jpg|png';
+            // $config['max_size']             = 100;
+            // $config['max_width']            = 1080;
+            // $config['max_height']           = 1080;
+            $config['encrypt_name']			= TRUE;
+
+            $this->load->library('upload', $config);
+
+			$this->form_validation->set_rules('url_foto','Url foto','required',message_id());
 			$this->form_validation->set_rules('keterangan','keterangan','required',message_id());
 			$this->form_validation->set_error_delimiters('<p class="warning">', '</p>');
 
-			if(!$this->form_validation->run()) {
+			if(!$this->form_validation->run() && !$this->upload->do_upload('url_foto')) {
                 generate_errors(['url_foto','keterangan'],false);
                 redirect('adminGaleri/editFoto/'.$this->input->post('foto_id'));
                 return false;
-
             } else {
-                
-				$this->galeri->editFoto();
+                $file = $this->upload->data('file_name'); 
+				$this->galeri->editFoto($file);
 				redirect('adminGaleri/foto');
 				return true;
             }

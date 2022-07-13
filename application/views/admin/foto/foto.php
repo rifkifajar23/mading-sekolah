@@ -10,7 +10,7 @@
 			<?php if(empty(trim($r->url_foto))) : ?>
 			<img src="<?= base_url('assets/img/noImage.png'); ?>">
 			<?php else: ?>
-			<img src="<?= $r->url_foto; ?>">
+			<img src="<?= base_url("assets/img/galeri/$r->url_foto"); ?>">
 			<?php endif; ?>
 			<div class="keterangan">
 			   	<p><?= $r->keterangan; ?></p>

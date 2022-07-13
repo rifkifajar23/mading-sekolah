@@ -16,10 +16,10 @@ class Model_galeri extends CI_Model {
 		return true;
 	}
 
-	public function editFoto() {
+	public function editFoto($file) {
 		$foto_id = $this->input->post('foto_id',true);
 		$data = [
-			'url_foto' => $this->input->post('url_foto',true),
+			'url_foto' => $file,
 			'keterangan' => $this->input->post('keterangan',true),
 			'post' => time()
 		];
